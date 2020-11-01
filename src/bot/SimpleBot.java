@@ -1,55 +1,58 @@
 package bot;
 
-import java.lang.reflect.Array;
-import java.math.BigInteger;
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
+/**
+ * Course: JetBrains Academy, Java Developer Track
+ * Project: Simple Chatty Bot
+ * Purpose: Very basic console chat bot to practice using variables, conditions, loops, and methods.
+ *
+ * @author Mirek Drozd
+ * @version 1.0
+ */
 public class SimpleBot {
-    final static Scanner scanner = new Scanner(System.in); // Do not change this line
-
+    public static Scanner scanner = new Scanner(System.in);
+    final static String ASSISTANT_NAME = "Alice";
+    final static String BIRTH_YEAR = "2020";
+    
+    /**
+     * The main method begins execution of the program.
+     *
+     * @param args not used
+     */
     public static void main(String[] args) {
-        /*greet("Alice", "2020"); // change it as you need
+        greet(ASSISTANT_NAME, BIRTH_YEAR);
         remindName();
         guessAge();
         count();
-        test();
-        end();*/
-
-        System.out.println(Arrays.toString(insertionSort(new int[] { 21, 23, 19, 30, 11, 28 })));
-        System.out.println(Arrays.toString(insertionSort(new int[] { 30, 28, 23, 21, 19, 11 })));
-
+        quiz();
     }
 
-    public static int[] insertionSort(int[] array) {
-        /* iterating over elements in the unsorted part */
-        for (int i = 1; i < array.length; i++) {
-            int elem = array[i]; // take the next element
-            int j = i - 1;
 
-            /* find a suitable position to insert and shift elements to the right */
-            while (j >= 0 && array[j] > elem) {
-                array[j + 1] = array[j]; // shifting
-                j--;
-            }
-            array[j + 1] = elem; // insert the element in the found position in the sorted part
-        }
-
-        return array;
-    }
-
+    /**
+     * Greets and asks the user about their name.
+     *
+     * @param assistantName The name of the bot.
+     * @param birthYear The year the bot was created.
+     */
     static void greet(String assistantName, String birthYear) {
         System.out.println("Hello! My name is " + assistantName + ".");
         System.out.println("I was created in " + birthYear + ".");
         System.out.println("Please, remind me your name.");
     }
 
+    /**
+     * Reads user name from standard input and uses the name in response.
+     */
     static void remindName() {
         String name = scanner.nextLine();
         System.out.println("What a great name you have, " + name + "!");
     }
 
+    /**
+     * Pretends to guess user age on the basis of remainders of dividing their age by 3, 5, and 7 (input by user).
+     * Actually, using a special formula, the bot calculates the age with 100% accuracy.
+     */
     static void guessAge() {
         System.out.println("Let me guess your age.");
         System.out.println("Say me remainders of dividing your age by 3, 5 and 7.");
@@ -60,6 +63,9 @@ public class SimpleBot {
         System.out.println("Your age is " + age + "; that's a good time to start programming!");
     }
 
+    /**
+     * Bot asks user for a number and shows that it can count from 0 to that number.
+     */
     static void count() {
         System.out.println("Now I will prove to you that I can count to any number you want.");
         int num = scanner.nextInt();
@@ -68,23 +74,36 @@ public class SimpleBot {
         }
     }
 
-    static void test() {
+    /**
+     * Bot asks user a programming question until the user selects the correct answer.
+     * After successful attempt, bot says 'Goodbye' and the program exits.
+     */
+    static void quiz() {
         System.out.println("Let's test your programming knowledge.");
         // write your code here
         System.out.println("Which of the following isn't a programming concept?");
         System.out.printf("1. Lambda\n" +
-                          "2. Currying" +
-                          "3. Functional decomposition" +
-                          "4. Duplex");
-        String answer;
+                          "2. Currying\n" +
+                          "3. Functional decomposition\n" +
+                          "4. Duplex\n");
+        int answer;
+        boolean isTrue;
         do {
-            answer = scanner.nextLine();
-            if (answer.equals("4")) break;
-            System.out.println("Please, try again.");
-        } while (true);
+            answer = scanner.nextInt();
+            if (answer == 4) {
+                isTrue = true;
+            } else {
+                isTrue = false;
+                System.out.println("Please, try again.");
+            }
+        } while (isTrue == false);
+        end();
     }
 
+    /**
+     * Says 'Goodbye' to user and exits the program.
+     */
     static void end() {
-        System.out.println("Congratulations, have a nice day!"); // Do not change this text
+        System.out.println("Congratulations, have a nice day!");
     }
 }
